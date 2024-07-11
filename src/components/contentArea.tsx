@@ -33,11 +33,11 @@ export default ContentArea;
 
 const OrderForm = () => {
   return (
-    <div className="mt-2 flex flex-col gap-2 lg:flex-row">
-      <div className="min-w-96 ">
+    <div className="mt-2 flex flex-col gap-4 lg:flex-row w-full">
+      <div className="flex-1 ">
         <InputArea />
       </div>
-      <div className="flex-1">
+      <div className="">
         <ProductArea />
       </div>
     </div>
@@ -139,24 +139,22 @@ const ProductArea = () => {
   selected = "print";
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="flex-1 flex justify-center">
-        <div className="flex-1 flex flex-col items-center">
+      <div className="flex-1 flex justify-center gap-4">
+        <div className="flex-1 flex flex-col items-center gap-4">
           <Product title="print" isSelected={selected === "print"}></Product>
-          <Product title="booklet" isSelected={selected === "booklet"}>
-            <div>cover options</div>
-          </Product>
+          <Product title="booklet" isSelected={selected === "booklet"}></Product>
         </div>
-        <div className="flex-1 flex flex-col items-center">
+        <div className="flex-1 flex flex-col items-center  gap-4">
           <Product title="spiral" isSelected={selected === "spiral"}></Product>
           <Product title="stitch" isSelected={selected === "stitch"}></Product>
         </div>
       </div>
-      <div className="flex-1 flex justify-center">
-        <div className="flex-1 flex flex-col items-center">
+      <div className="flex-1 flex justify-center gap-4 md:ml-4">
+        <div className="flex-1 flex flex-col items-center  gap-4">
           <Product title="softcover" isSelected={selected === "softcover"}></Product>
           <Product title="holePunch" isSelected={selected === "holePunch"}></Product>
         </div>
-        <div className="flex-1 flex flex-col items-center">
+        <div className="flex-1 flex flex-col items-center  gap-4">
           <Product title="hardcover" isSelected={selected === "hardcover"}></Product>
           <Product title="lamination" isSelected={selected === "lamination"}></Product>
         </div>
@@ -183,7 +181,7 @@ const Product = ({ title, isSelected }: { title: string; isSelected: boolean; ch
     imageToShow = lamination;
   }
   return (
-    <div className={cn("flex flex-col items-center bg-slate-50 rounded-lg w-36 py-2 border mb-4", isSelected ? "bg-slate-50" : "bg-slate-50")}>
+    <div className={cn("flex flex-col items-center bg-slate-50 rounded-lg w-36 py-2 border ", isSelected ? "bg-slate-50" : "bg-slate-50")}>
       <input type="checkbox" hidden />
 
       <div className="relative">

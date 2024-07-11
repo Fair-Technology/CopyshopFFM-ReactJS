@@ -2,7 +2,7 @@ import ContentArea from "./components/contentArea";
 
 function App() {
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto">
       <Navbar />
       <ContentArea />
     </div>
