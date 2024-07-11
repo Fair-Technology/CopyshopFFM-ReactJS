@@ -1,5 +1,4 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
+import ContentArea from "./components/contentArea";
 
 function App() {
   return (
@@ -12,6 +11,6 @@ function App() {
 
 export default App;
 
-const ContentArea = () => {
-  return <div className="bg-green-300">ContentArea</div>;
+const Navbar = () => {
+  return <div className="bg-red-500">Navbar</div>;
 };
