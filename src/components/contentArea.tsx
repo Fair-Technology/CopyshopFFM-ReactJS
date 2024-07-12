@@ -77,59 +77,74 @@ const InputArea = () => {
 
 const Format = () => {
   return (
-    <select defaultValue="A4" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
-      <option value="A3">A3</option>
-      <option value="A4">A4</option>
-      <option value="A5">A5</option>
-    </select>
+    <div>
+      <label htmlFor="format">Format</label>
+      <select id="format" defaultValue="A4" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+        <option value="A3">A3</option>
+        <option value="A4">A4</option>
+        <option value="A5">A5</option>
+      </select>
+    </div>
   );
 };
 const Weight = () => {
   return (
-    <select defaultValue="80g" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
-      <option value="80g">80g</option>
-      <option value="100g">100g</option>
-      <option value="120g">120g</option>
-    </select>
+    <div>
+      <label htmlFor="weight">Weight</label>
+      <select id="weight" defaultValue="80g" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+        <option value="80g">80g</option>
+        <option value="100g">100g</option>
+        <option value="120g">120g</option>
+      </select>
+    </div>
   );
 };
 const PrintSetting = () => {
   return (
-    <select defaultValue="singleSided" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
-      <option value="singleSided">singleSided</option>
-      <option value="doubleSided">doubleSided</option>
-    </select>
+    <div>
+      <label htmlFor="printSetting">printSetting</label>
+      <select id="printSetting" defaultValue="singleSided" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+        <option value="singleSided">singleSided</option>
+        <option value="doubleSided">doubleSided</option>
+      </select>
+    </div>
   );
 };
 const FlipSetting = () => {
   return (
-    <select defaultValue="longSideFlip" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
-      <option value="longSideFlip">longSideFlip</option>
-      <option value="shortSideFlip">shortSideFlip</option>
-    </select>
+    <div>
+      <label htmlFor="flipSetting">flipSetting</label>
+      <select id="flipSetting" defaultValue="longSideFlip" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+        <option value="longSideFlip">longSideFlip</option>
+        <option value="shortSideFlip">shortSideFlip</option>
+      </select>
+    </div>
   );
 };
 const NumberOfSets = () => {
   return (
-    <div className="flex items-center gap-4">
-      <div>noOfSets</div>
-      <input type="number" min="1" defaultValue="1" className="w-full border p-2 rounded focus:outline-none focus:ring-0" />
+    <div className="flex items-center gap-4 ">
+      <label className="flex-1">noOfSets</label>
+      <input type="number" min="1" defaultValue="1" className="flex-1  border p-2 rounded focus:outline-none focus:ring-0" />
+      <div className="flex-1">Sets</div>
     </div>
   );
 };
 const BWPages = () => {
   return (
     <div className="flex items-center gap-4">
-      <div>bwPages</div>
-      <input type="number" min="0" defaultValue="1" className="w-full border p-2 rounded focus:outline-none focus:ring-0" />
+      <label className="flex-1">BW</label>
+      <input type="number" min="0" defaultValue="1" className="flex-1  border p-2 rounded focus:outline-none focus:ring-0" />
+      <div className="flex-1">Pages</div>
     </div>
   );
 };
 const ColorPages = () => {
   return (
     <div className="flex items-center gap-4">
-      <div>colorPages</div>
-      <input type="number" min="0" defaultValue="1" className="w-full border p-2 rounded focus:outline-none focus:ring-0" />
+      <label className="flex-1">colorPages</label>
+      <input type="number" min="0" defaultValue="1" className="flex-1  border p-2 rounded focus:outline-none focus:ring-0" />
+      <div className="flex-1">Pages</div>
     </div>
   );
 };

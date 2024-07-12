@@ -1,8 +1,9 @@
 import ContentArea from "./components/contentArea";
+import "./App.css";
 
 function App() {
   return (
-    <div className="container mx-auto">
+    <div className="app container mx-auto">
       <Navbar />
       <ContentArea />
     </div>
