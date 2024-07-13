@@ -3,10 +3,12 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="app container mx-auto">
+    <>
       <Navbar />
+      <div className="app container mx-auto">
       <ContentArea />
     </div>
+    </>
   );
 }
 
