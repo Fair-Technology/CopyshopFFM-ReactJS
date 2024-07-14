@@ -11,6 +11,7 @@ import lamination from "../assets/lamination.jpg";
 import Checkmark from "../assets/check-mark.png";
 import { ReactNode } from "react";
 import { cn } from "../lib/utils";
+import FirebaseTest from "./firebaseTest";
 
 const ContentArea = () => {
   return (
@@ -20,6 +21,7 @@ const ContentArea = () => {
         <div className="flex flex-col xl:flex-row">
           <OrderForm />
         </div>
+        <FirebaseTest />
       </div>
       <div className="min-w-72 border p-2 rounded-md">
         <Heading text="calculation" />
