@@ -1,5 +1,5 @@
 import ContentArea from "./components/contentArea";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 
 function App() {
   return (
