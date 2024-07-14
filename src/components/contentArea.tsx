@@ -79,7 +79,7 @@ const Format = () => {
   return (
     <div>
       <label htmlFor="format">Format</label>
-      <select id="format" defaultValue="A4" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+      <select id="format" defaultValue="A4" className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0">
         <option value="A3">A3</option>
         <option value="A4">A4</option>
         <option value="A5">A5</option>
@@ -91,7 +91,7 @@ const Weight = () => {
   return (
     <div>
       <label htmlFor="weight">Weight</label>
-      <select id="weight" defaultValue="80g" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+      <select id="weight" defaultValue="80g" className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0">
         <option value="80g">80g</option>
         <option value="100g">100g</option>
         <option value="120g">120g</option>
@@ -103,7 +103,7 @@ const PrintSetting = () => {
   return (
     <div>
       <label htmlFor="printSetting">printSetting</label>
-      <select id="printSetting" defaultValue="singleSided" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+      <select id="printSetting" defaultValue="singleSided" className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0">
         <option value="singleSided">singleSided</option>
         <option value="doubleSided">doubleSided</option>
       </select>
@@ -114,7 +114,7 @@ const FlipSetting = () => {
   return (
     <div>
       <label htmlFor="flipSetting">flipSetting</label>
-      <select id="flipSetting" defaultValue="longSideFlip" className="w-full border p-2 rounded focus:outline-none focus:ring-0">
+      <select id="flipSetting" defaultValue="longSideFlip" className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0">
         <option value="longSideFlip">longSideFlip</option>
         <option value="shortSideFlip">shortSideFlip</option>
       </select>
