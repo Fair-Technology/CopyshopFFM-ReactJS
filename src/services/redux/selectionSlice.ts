@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../modals/order";
+import { checkValidity } from "../../lib/utils";
 
 interface InitialSelectionState {
   selectedProduct: Product;
+  error: string | null;
 }
 
 export const defaultSelection: Product = {
@@ -22,6 +24,7 @@ export const defaultSelection: Product = {
 
 const initialState: InitialSelectionState = {
   selectedProduct: defaultSelection,
+  error: null,
 };
 
 export const selectionSlice = createSlice({
@@ -29,7 +32,13 @@ export const selectionSlice = createSlice({
   initialState,
   reducers: {
     setFormat: (state, action: PayloadAction<string>) => {
-      state.selectedProduct.format = action.payload;
+      const tempState = { ...state.selectedProduct, format: action.payload };
+      if (checkValidity(tempState)) {
+        state.selectedProduct.format = action.payload;
+        state.error = null;
+      } else {
+        state.error = "Invalid Format";
+      }
     },
     setWeight: (state, action: PayloadAction<string>) => {
       state.selectedProduct.weight = action.payload;
@@ -89,6 +98,9 @@ export const selectionSlice = createSlice({
       state.selectedProduct.option = {
         name: action.payload,
       };
+    },
+    setError(state, action: PayloadAction<string>) {
+      state.error = action.payload;
     },
   },
 });

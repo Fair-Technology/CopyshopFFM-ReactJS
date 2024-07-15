@@ -42,7 +42,6 @@ const ContentArea = () => {
         <div className="flex flex-col xl:flex-row">
           <OrderForm />
         </div>
-        {/* <FirebaseTest /> */}
       </div>
       <div className="min-w-72 border p-2 rounded-md">
         <Heading text="calculation" />
@@ -66,7 +65,6 @@ const OrderForm = () => {
 		</div>
 	);
 };
-
 const InputArea = () => {
 	return (
 		<div className="flex flex-col gap-3">
@@ -97,12 +95,12 @@ const InputArea = () => {
 		</div>
 	);
 };
-
 const Format = () => {
   const dispatch = useAppDispatch();
-  const [selectedFormat, setSelectedFormat] = useState<string>(defaultSelection.format);
+  // const [selectedFormat, setSelectedFormat] = useState<string>(defaultSelection.format);
+  const selectedFormat = useAppSelector((store: RootState) => store.selection.selectedProduct.format);
+
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFormat(e.target.value);
     dispatch(setFormat(e.target.value));
   };
 
@@ -186,7 +184,6 @@ const NumberOfSets = () => {
     </div>
   );
 };
-
 const BWPages = () => {
   const dispatch = useAppDispatch();
   const [selectedBWPages, setSelectedBWPages] = useState<number>(defaultSelection.bwPages);
@@ -196,6 +193,7 @@ const BWPages = () => {
     setSelectedBWPages(value);
     dispatch(setBWPages(value));
   };
+
   return (
     <div className="flex items-center gap-4">
       <label className="flex-1">BW</label>
@@ -221,7 +219,6 @@ const ColorPages = () => {
     </div>
   );
 };
-
 const ProductArea = () => {
   const selected = useAppSelector((store: RootState) => store.selection.selectedProduct.option.name);
   const frontCoverOptions = ["red", "green", "blue", "yellow", "black", "white"];
@@ -315,7 +312,6 @@ const ProductArea = () => {
     </div>
   );
 };
-
 const Product = ({ title, isSelected, children }: { title: string; isSelected: boolean; children?: ReactNode }) => {
   const dispatch = useAppDispatch();
 
@@ -386,7 +382,6 @@ const Product = ({ title, isSelected, children }: { title: string; isSelected: b
     </div>
   );
 };
-
 const ProductOptions = ({ title, options, handleOnChange }: { title: string; options: string[] | boolean[]; handleOnChange: () => void }) => {
   return (
     <div className="mb-2 px-2">
