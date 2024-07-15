@@ -1,4 +1,5 @@
 import logoImg from "../assets/Copyshop-FFM-Logo_img.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	return (
@@ -24,22 +25,16 @@ const Logo = () => {
 const NavList = () => {
 	return (
 		<ul className="flex gap-8 px-8 text-2xl text-white">
-			<NavListItem page="Home" />
-			<NavListItem page="Cart" />
-			<NavListItem page="OrderState" />
+			<NavListItem page="Home" route="/" />
+			<NavListItem page="Cart" route="/cart" />
+			<NavListItem page="OrderState" route="/ourdersearch" />
 		</ul>
 	);
 };
-const NavListItem = ({
-	page,
-	buttonClass,
-}: {
-	page: string;
-	buttonClass?: string;
-}) => {
+const NavListItem = ({ page, route }: { page: string; route: string }) => {
 	return (
 		<li>
-			<button className={buttonClass}>{page}</button>
+			<Link to={route}>{page}</Link>
 		</li>
 	);
 };
