@@ -1,15 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // page routes
-import CartPage from "./Pages/CartPage";
-import CheckOutPage from "./Pages/CheckOutPage";
-import ErrorPage from "./Pages/ErrorPage";
-import HomePage from "./Pages/HomePage";
-import LoginPage from "./Pages/LoginPage";
-import OrderSearchPage from "./Pages/OrderSearchPage";
-import ThankYouPage from "./Pages/ThankYouPage";
-import AdminPage from "./Pages/adminPages/AdminPage";
-import DashBoardPage from "./Pages/adminPages/DashBoardPage";
-import SettingPage from "./Pages/adminPages/SettingPage";
+import HomePage from "./pages/home";
+import CartPage from "./pages/cart";
+import CheckOutPage from "./pages/checkout";
+import LoginPage from "./pages/login";
+import OrderSearchPage from "./pages/ordersearch";
+import ThankYouPage from "./pages/thankyou";
+import AdminPage from "./pages/admin/admin";
+import DashBoardPage from "./pages/admin/dashboard";
+import SettingPage from "./pages/admin/settings";
+import ErrorPage from "./pages/error";
+
 //components
 import Navbar from "./components/navbar";
 
@@ -27,7 +28,7 @@ const App: React.FC = () => (
 			{/* admin routes */}
 			<Route path="/admin" element={<AdminPage />} />
 			<Route path="/admin/dashboard" element={<DashBoardPage />} />
-			<Route path="/admin/setting" element={<SettingPage />} />
+			<Route path="/admin/settings" element={<SettingPage />} />
 			{/* 404 page */}
 			<Route path="*" element={<ErrorPage />} />
 		</Routes>
