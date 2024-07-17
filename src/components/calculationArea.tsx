@@ -100,10 +100,7 @@ const CostSum = () => {
 
 const AddToCartBtn = () => {
 	return (
-		<div
-			onClick={AddToCart}
-			className="bg-red-600 text-white text-xl font-bold grid place-content-center min-h-12"
-		>
+		<div onClick={AddToCart} className="custom-button min-h-12">
 			Add to Cart
 		</div>
 	);
