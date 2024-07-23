@@ -23,7 +23,6 @@ export interface Product {
   colorPages: number;
   file: string;
   option: ProductOption;
-  price: number;
 }
 
 export interface Order {
