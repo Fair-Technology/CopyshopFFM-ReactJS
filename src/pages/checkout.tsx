@@ -3,8 +3,8 @@ import Heading from "../components/heading";
 
 const CheckOutPage = () => {
 	return (
-		<div className="flex p-2 justify-center bg-green-200">
-			<div className="2xl:max-w-screen-2xl w-full sm:flex bg-green-400">
+		<div className="flex p-2 justify-center ">
+			<div className="2xl:max-w-screen-2xl w-full sm:flex ">
 				<Left />
 				<Right />
 			</div>
