@@ -2,9 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer utilities {
-  .custom-button {
-    @apply bg-red-600 text-white text-lg font-bold grid place-content-center;
-  }
-}
