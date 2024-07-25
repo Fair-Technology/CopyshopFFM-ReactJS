@@ -102,7 +102,7 @@ const AddToCartBtn = () => {
 	return (
 		<div
 			onClick={AddToCart}
-			className="bg-red-600 text-white text-lg font-bold grid place-content-center min-h-12"
+			className="bg-red-600 text-white text-lg font-bold place-content-center min-h-12"
 		>
 			Add to Cart
 		</div>
