@@ -101,15 +101,10 @@ const CostSum = () => {
 const AddToCartBtn = () => {
 	return (
 		<div
-			onClick={AddToCart}
-			className="bg-red-600 text-white text-xl font-bold grid place-content-center min-h-12"
+			onClick={() => alert("Added to cart")}
+			className="bg-red-600 text-white text-lg font-bold place-content-center min-h-12"
 		>
 			Add to Cart
 		</div>
 	);
-};
-
-const AddToCart = () => {
-	alert("You successfully added the items into Cart");
-	return;
 };
