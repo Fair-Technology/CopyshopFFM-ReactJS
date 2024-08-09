@@ -124,9 +124,7 @@ const StateIcon: React.FC<StateIconProps> = ({
 
 const PayPalDiv = () => {
 	return (
-		<div className="flex justify-center">
-			<PayPal />
-		</div>
+		<div className="flex justify-center">This Div Reserved for Paypal</div>
 	);
 };
 
