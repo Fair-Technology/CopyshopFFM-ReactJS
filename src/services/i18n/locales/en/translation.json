@@ -1,3 +1,10 @@
 {
-  "orderForm": "Order Form"
+  "orderForm": "Order Form",
+  "format": "Format",
+  "weight": "Weight",
+  "printSetting": "Print Setting",
+  "flipSetting": "Flip Setting",
+  "numberOfSets": "Number of Sets",
+  "bwPages": "Black & White Pages",
+  "colorPages": "Colour Pages"
 }
