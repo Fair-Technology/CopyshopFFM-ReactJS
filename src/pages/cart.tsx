@@ -5,7 +5,7 @@ import { FaForward, FaBackward } from "react-icons/fa";
 
 const CartPage = () => {
   return (
-    <div className="container mx-auto mt-4 w-4/5">
+    <div className="container mx-auto mt-8 w-4/5">
       <CartHeader />
       <CartItems />
       <CartActions />
@@ -48,9 +48,13 @@ const CartItems = () => {
           <ProductDelivery />
           <TableRow>
             <td className="px-4 py-2"></td>
-            <td colSpan={3} className="px-4 py-2 font-medium whitespace-nowrap">
+            <td
+              colSpan={2}
+              className="px-4 py-2 font-medium whitespace-nowrap text-right"
+            >
               Subtotal
             </td>
+            <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-medium text-blue-800">
               €310.00
             </td>
@@ -58,9 +62,13 @@ const CartItems = () => {
           </TableRow>
           <TableRow>
             <td className="px-4 py-2"></td>
-            <td colSpan={3} className="px-4 py-2 font-normal whitespace-nowrap">
+            <td
+              colSpan={2}
+              className="px-4 py-2 font-normal whitespace-nowrap text-right"
+            >
               Tax (incl. 19% VAT)
             </td>
+            <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-normal text-blue-800">
               €10.00
             </td>
@@ -68,9 +76,13 @@ const CartItems = () => {
           </TableRow>
           <TableRow>
             <td className="px-4 py-2"></td>
-            <td colSpan={3} className="px-4 py-2 font-normal whitespace-nowrap">
+            <td
+              colSpan={2}
+              className="px-4 py-2 font-normal whitespace-nowrap text-right"
+            >
               Tax (incl. 7% VAT)
             </td>
+            <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-normal text-blue-800">
               €10.00
             </td>
@@ -81,11 +93,12 @@ const CartItems = () => {
           <TableRow>
             <td className="px-4 py-2"></td>
             <td
-              colSpan={3}
-              className="px-4 py-2 font-bold whitespace-nowrap text-lg"
+              colSpan={2}
+              className="px-4 py-2 font-bold whitespace-nowrap text-lg text-right"
             >
               Total (including all taxes and shipping charges)
             </td>
+            <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-bold text-blue-800 text-lg">
               €330.00
             </td>
@@ -281,7 +294,7 @@ const CartActions = () => {
 
 const TableRow = ({ children }: { children: React.ReactNode }) => {
   return (
-    <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
+    <tr className="even:bg-white odd:bg-slate-100 border-b border-slate-300">
       {children}
     </tr>
   );
