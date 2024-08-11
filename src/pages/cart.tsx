@@ -1,4 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { IconContext } from "react-icons";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaForward, FaBackward } from "react-icons/fa";
 
 const CartPage = () => {
   return (
@@ -26,8 +29,8 @@ const CartHeader = () => {
 
 const CartItems = () => {
   return (
-    <div className="mb-2">
-      <table className="table-auto">
+    <div className="shadow-md sm:rounded-lg overflow-x-auto">
+      <table className="min-w-[980px] table-auto w-full">
         <thead>
           <tr className="border-b border-slate-300">
             <th className="px-4 py-3"></th>
@@ -43,8 +46,52 @@ const CartItems = () => {
             <CartItem key={index} />
           ))}
           <ProductDelivery />
+          <TableRow>
+            <td className="px-4 py-2"></td>
+            <td colSpan={3} className="px-4 py-2 font-medium whitespace-nowrap">
+              Subtotal
+            </td>
+            <td className="px-4 py-2 text-right font-medium text-blue-800">
+              €310.00
+            </td>
+            <td className="px-4 py-2"></td>
+          </TableRow>
+          <TableRow>
+            <td className="px-4 py-2"></td>
+            <td colSpan={3} className="px-4 py-2 font-normal whitespace-nowrap">
+              Tax (incl. 19% VAT)
+            </td>
+            <td className="px-4 py-2 text-right font-normal text-blue-800">
+              €10.00
+            </td>
+            <td className="px-4 py-2"></td>
+          </TableRow>
+          <TableRow>
+            <td className="px-4 py-2"></td>
+            <td colSpan={3} className="px-4 py-2 font-normal whitespace-nowrap">
+              Tax (incl. 7% VAT)
+            </td>
+            <td className="px-4 py-2 text-right font-normal text-blue-800">
+              €10.00
+            </td>
+            <td className="px-4 py-2"></td>
+          </TableRow>
         </tbody>
-        <tfoot></tfoot>
+        <tfoot>
+          <TableRow>
+            <td className="px-4 py-2"></td>
+            <td
+              colSpan={3}
+              className="px-4 py-2 font-bold whitespace-nowrap text-lg"
+            >
+              Total (including all taxes and shipping charges)
+            </td>
+            <td className="px-4 py-2 text-right font-bold text-blue-800 text-lg">
+              €330.00
+            </td>
+            <td className="px-4 py-2"></td>
+          </TableRow>
+        </tfoot>
       </table>
     </div>
   );
@@ -52,13 +99,17 @@ const CartItems = () => {
 
 const CartItem = () => {
   return (
-    <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
-      <td className="px-4 py-2 size-32">
-        <img src={"src/assets/print.jpg"} alt="Product image" className="" />
+    <TableRow>
+      <td className="px-4 py-2 size-32 flex-none">
+        <img
+          src={"src/assets/print.jpg"}
+          alt="Product image"
+          className="size-32"
+        />
       </td>
       <td className="px-4 py-2">
-        <p className="font-bold">1x</p>
-        <p className="font-bold"> Print </p>
+        <p className="font-normal">1x</p>
+        <p className="font-normal"> Print </p>
       </td>
       <td className="px-4 py-2">
         <ProductOptions />
@@ -66,13 +117,17 @@ const CartItem = () => {
       <td className="px-4 py-2 text-center">
         <ProductQuantity />
       </td>
-      <td className="px-4 py-2">$100.00</td>
+      <td className="px-4 py-2 text-right font-normal text-blue-800">
+        €100.00
+      </td>
       <td className="px-4 py-2">
-        <button className="text-red-600 hover:text-red-800 font-medium rounded text-sm px-5 py-2.5 focus:outline-none">
-          Remove
+        <button className="text-white bg-red-600 hover:text-red-800 text-lg text-center font-medium rounded focus:outline-none p-1">
+          <IconContext.Provider value={{ className: "size-6" }}>
+            <MdDeleteOutline />
+          </IconContext.Provider>
         </button>
       </td>
-    </tr>
+    </TableRow>
   );
 };
 
@@ -87,7 +142,7 @@ const ProductOptions = () => {
     colorPages: 0,
   };
   return (
-    <div className="flex-wrap">
+    <div className="">
       {Object.entries(orderProps).map(([key, value]) => (
         <Chip key={key} name={key} value={value.toString()} />
       ))}
@@ -125,54 +180,111 @@ const ProductQuantity = () => {
 const ProductDelivery = () => {
   return (
     <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
-      <td colSpan={4} className="px-4 py-2">
-        <div>
-          <div className="mb-3">Shipping options</div>
-          <div className="flex items-center mb-4">
+      <td className="px-4 py-2"></td>
+      <td className="px-4 py-2 font-normal"> Delivery </td>
+      <td colSpan={2} className="px-4 py-2">
+        <div className="pl-8">
+          <div className="">
             <input
               id="default-radio-1"
               type="radio"
               value=""
               name="default-radio"
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+              className="size-4"
             />
-            <label
-              htmlFor="default-radio-1"
-              className="ms-2 text-sm font-base flex flex-col"
-            >
-              <span className="px-1">Pick-up - Downtown branch</span>{" "}
-              <span className="px-1 text-gray-400">
-                Mon-Sat 10:00 AM - 6:00 PM
+            <label htmlFor="default-radio-1" className="text-base font-base">
+              <span className="p-2 relative top-[-3px] inline-block">
+                Pick-up - Downtown branch{" "}
+                <span className="inline-block">
+                  (Mon-Sat 10:00 AM - 6:00 PM)
+                </span>
               </span>
             </label>
           </div>
-          <div className="flex items-center">
+          <div className="">
             <input
               checked
               id="default-radio-2"
               type="radio"
               value=""
               name="default-radio"
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+              className="size-4"
             />
-            <label
-              htmlFor="default-radio-2"
-              className="ms-2 text-sm font-base flex flex-col"
-            >
-              <span className="px-1">DHL Shipping</span>
-              <span className="px-1 text-gray-400">Germany-wide</span>
+            <label htmlFor="default-radio-2" className="text-base font-base">
+              <span className="p-2 relative top-[-3px] inline-block">
+                DHL Shipping (Germany-wide)
+              </span>
             </label>
           </div>
         </div>
       </td>
-      <td className="px-4 py-2">$10.00</td>
+      <td className="px-4 py-2 text-right font-normal text-blue-800">€10.00</td>
       <td className="px-4 py-2"></td>
     </tr>
   );
 };
 
 const CartActions = () => {
-  return <div className="px-3"></div>;
+  return (
+    <div className="px-3 my-4">
+      <div className="flex p-8">
+        <div className="grow"></div>
+        <input
+          id="default-checkbox"
+          type="checkbox"
+          className="size-6 rounded-lg accent-blue-500"
+          value=""
+        ></input>
+        <label
+          htmlFor="default-checkbox"
+          className="text-base font-base self-end pl-3"
+        >
+          I have read and agree to the{" "}
+          <a href="#" className="text-blue-800">
+            Terms and Conditions
+          </a>{" "}
+          and the{" "}
+          <a href="#" className="text-blue-800">
+            Privacy Policy
+          </a>
+          .
+        </label>
+      </div>
+      <div className="flex justify-between items-center">
+        <button
+          type="button"
+          className="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-lg px-5 py-2.5 focus:outline-none w-2/5"
+        >
+          <IconContext.Provider value={{ className: "size-5 inline mx-2" }}>
+            <FaBackward />
+          </IconContext.Provider>
+
+          <span className="inline-block relative bottom-[-3px]">
+            {" Add More items".toUpperCase()}
+          </span>
+        </button>
+        <button
+          type="button"
+          className="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-lg px-5 py-2.5 focus:outline-none w-2/5"
+        >
+          <span className="inline-block relative bottom-[-3px]">
+            {"Proceed to checkout".toUpperCase()}
+          </span>
+          <IconContext.Provider value={{ className: "size-5 inline mx-2" }}>
+            <FaForward />
+          </IconContext.Provider>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const TableRow = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
+      {children}
+    </tr>
+  );
 };
 
 export default CartPage;
