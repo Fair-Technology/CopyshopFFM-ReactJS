@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux";
 import { calculatePrice } from "../lib/utils";
 import { setError } from "../services/redux/selectionSlice";
 import { RootState, useAppDispatch, useAppSelector } from "../services/redux/store";
 import Heading from "./heading";
+import { useTranslation } from "react-i18next";
 
 const CalculationArea = () => {
   const dispatch = useAppDispatch();
+
   const error = useAppSelector((store: RootState) => store.selection.error);
   if (error) {
     alert(error);
@@ -29,42 +32,44 @@ const CalculationArea = () => {
 export default CalculationArea;
 
 const FormInfoList = () => {
+  const { t } = useTranslation();
+  const format = useSelector((store: RootState) => store.selection.selectedProduct.format);
   return (
     <div className="py-2">
       <table className="min-w-full bg-white border border-gray-200">
         <tbody>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Paper Format</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">A4</td>
+            <td className="px-4 py-2 border-b border-gray-200">{t("format")}</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">{format}</td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Paper weight</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">
+            <td className="px-4 py-2 border-b border-gray-200">Paper weight</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">
               80g/m<sup>2</sup>
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Print Side</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">One-Sided</td>
+            <td className="px-4 py-2 border-b border-gray-200">Print Side</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">One-Sided</td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Pages in PDF</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">
+            <td className="px-4 py-2 border-b border-gray-200">Pages in PDF</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">
               <div>Black and white: 3</div>
               <div>Color: 2</div>
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Copies</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">3 copies</td>
+            <td className="px-4 py-2 border-b border-gray-200">Copies</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">3 copies</td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Next Step</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">Print</td>
+            <td className="px-4 py-2 border-b border-gray-200">Next Step</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">Print</td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-200">Options</td>
-            <td className="py-2 px-4 border-b border-l border-gray-200">NA</td>
+            <td className="px-4 py-2 border-b border-gray-200">Options</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">NA</td>
           </tr>
         </tbody>
       </table>
@@ -96,7 +101,7 @@ const CostSum = () => {
         &euro; 0.00
         </div>
       </div> */}
-        <div className=" text-sm px-1">* If you pick at store, the delivery fee will be &euro;0.</div>
+        <div className="px-1 text-sm ">* If you pick at store, the delivery fee will be &euro;0.</div>
       </div>
     </div>
   );
@@ -105,7 +110,7 @@ const CostSum = () => {
 const AddToCartBtn = () => {
 			onClick={() => alert("test add to cart")}
   return (
-    <div onClick={AddToCart} className="bg-red-600 text-white text-xl font-bold grid place-content-center min-h-12">
+    <div onClick={AddToCart} className="grid text-xl font-bold text-white bg-red-600 place-content-center min-h-12">
       Add to Cart
     </div>
   );

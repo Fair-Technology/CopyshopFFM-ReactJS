@@ -30,14 +30,14 @@ const wait = (ms: number, signal?: AbortSignal) =>
 const ContentArea = () => {
   return (
     <div className="flex flex-col gap-2 mt-2 xl:flex-row">
-      <div className="flex-1 border p-2 rounded-md">
+      <div className="flex-1 p-2 border rounded-md">
         <Heading text="orderForm" />
         <div className="flex flex-col xl:flex-row">
           <OrderForm />
         </div>
       </div>
-      <div className="min-w-72 border p-2 rounded-md">
-        <Heading text="calculation" />
+      <div className="p-2 border rounded-md min-w-72">
+        <Heading text="Calculation" />
         <CalculationArea />
       </div>
     </div>
@@ -48,7 +48,7 @@ export default ContentArea;
 
 const OrderForm = () => {
   return (
-    <div className="mt-2 flex flex-col gap-4 lg:flex-row w-full">
+    <div className="flex flex-col w-full gap-4 mt-2 lg:flex-row">
       <div className="flex-1 ">
         <InputArea />
       </div>
@@ -100,7 +100,7 @@ const Format = () => {
   return (
     <div>
       <label htmlFor="format">Format</label>
-      <select id="format" value={selectedProduct.format} className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0" onChange={handleChange}>
+      <select id="format" value={selectedProduct.format} className="w-full h-10 pl-1 border rounded focus:outline-none focus:ring-0" onChange={handleChange}>
         <option value="A3">A3</option>
         <option value="A4">A4</option>
         <option value="A5">A5</option>
@@ -122,7 +122,7 @@ const Weight = () => {
   return (
     <div>
       <label htmlFor="weight">Weight</label>
-      <select id="weight" value={selectedProduct.weight} className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0" onChange={handleChange}>
+      <select id="weight" value={selectedProduct.weight} className="w-full h-10 pl-1 border rounded focus:outline-none focus:ring-0" onChange={handleChange}>
         <option value="80g">80g</option>
         <option value="100g">100g</option>
         <option value="120g">120g</option>
@@ -145,7 +145,7 @@ const PrintSetting = () => {
   return (
     <div>
       <label htmlFor="printSetting">printSetting</label>
-      <select id="printSetting" value={selectedProduct.printSetting} className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0" onChange={handleChange}>
+      <select id="printSetting" value={selectedProduct.printSetting} className="w-full h-10 pl-1 border rounded focus:outline-none focus:ring-0" onChange={handleChange}>
         <option value="singleSided">singleSided</option>
         <option value="doubleSided">doubleSided</option>
       </select>
@@ -163,7 +163,7 @@ const FlipSetting = () => {
   return (
     <div>
       <label htmlFor="flipSetting">flipSetting</label>
-      <select id="flipSetting" value={selectedProduct.flipSetting || ""} className="w-full border h-10 pl-1 rounded focus:outline-none focus:ring-0" onChange={handleChange}>
+      <select id="flipSetting" value={selectedProduct.flipSetting || ""} className="w-full h-10 pl-1 border rounded focus:outline-none focus:ring-0" onChange={handleChange}>
         <option value="longSideFlip">longSideFlip</option>
         <option value="shortSideFlip">shortSideFlip</option>
       </select>
@@ -181,7 +181,7 @@ const NumberOfSets = () => {
   return (
     <div className="flex items-center gap-4 ">
       <label className="flex-1">noOfSets</label>
-      <input type="number" min="1" value={selectedProduct.noOfSets} className="flex-1  border p-2 rounded focus:outline-none focus:ring-0" onChange={handleChange} />
+      <input type="number" min="1" value={selectedProduct.noOfSets} className="flex-1 p-2 border rounded focus:outline-none focus:ring-0" onChange={handleChange} />
       <div className="flex-1">Sets</div>
     </div>
   );
@@ -198,7 +198,7 @@ const BWPages = () => {
   return (
     <div className="flex items-center gap-4">
       <label className="flex-1">BW</label>
-      <input type="number" min="0" value={selectedProduct.bwPages} className="flex-1  border p-2 rounded focus:outline-none focus:ring-0" onChange={handleChange} />
+      <input type="number" min="0" value={selectedProduct.bwPages} className="flex-1 p-2 border rounded focus:outline-none focus:ring-0" onChange={handleChange} />
       <div className="flex-1">Pages</div>
     </div>
   );
@@ -216,7 +216,7 @@ const ColorPages = () => {
   return (
     <div className="flex items-center gap-4">
       <label className="flex-1">colorPages</label>
-      <input type="number" min="0" value={selectedProduct.colorPages} className="flex-1  border p-2 rounded focus:outline-none focus:ring-0" onChange={handleChange} />
+      <input type="number" min="0" value={selectedProduct.colorPages} className="flex-1 p-2 border rounded focus:outline-none focus:ring-0" onChange={handleChange} />
       <div className="flex-1">Pages</div>
     </div>
   );
@@ -286,14 +286,14 @@ const ProductArea = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="flex-1 flex justify-center gap-4">
-        <div className="flex-1 flex flex-col items-center gap-4">
+      <div className="flex justify-center flex-1 gap-4">
+        <div className="flex flex-col items-center flex-1 gap-4">
           <Product title="print" isSelected={selectedname === "print"}></Product>
           <Product title="booklet" isSelected={selectedname === "booklet"}>
             <ProductOptions title="coverWeight" options={coverWeightOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleCoverWeightChange(e)} />
           </Product>
         </div>
-        <div className="flex-1 flex flex-col items-center  gap-4">
+        <div className="flex flex-col items-center flex-1 gap-4">
           <Product title="spiral" isSelected={selectedname === "spiral"}>
             <ProductOptions title="frontCover" options={frontCoverOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleFrontCoverChange(e)} />
             <ProductOptions title="backCover" options={backCoverOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleBackCoverChange(e)} />
@@ -305,8 +305,8 @@ const ProductArea = () => {
           </Product>
         </div>
       </div>
-      <div className="flex-1 flex justify-center gap-4 md:ml-4">
-        <div className="flex-1 flex flex-col items-center  gap-4">
+      <div className="flex justify-center flex-1 gap-4 md:ml-4">
+        <div className="flex flex-col items-center flex-1 gap-4">
           <Product title="softcover" isSelected={selectedname === "softcover"}>
             <ProductOptions title="frontCover" options={frontCoverOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleFrontCoverChange(e)} />
             <ProductOptions title="backCover" options={backCoverOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleBackCoverChange(e)} />
@@ -318,7 +318,7 @@ const ProductArea = () => {
             <ProductOptions title="holePunchSide" options={holePunchSideOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleHolePunchSideChange(e)} />
           </Product>
         </div>
-        <div className="flex-1 flex flex-col items-center  gap-4">
+        <div className="flex flex-col items-center flex-1 gap-4">
           <Product title="hardcover" isSelected={selectedname === "hardcover"}>
             <ProductOptions title="coverColor" options={coverColorOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleCoverColorChange(e)} />
             <ProductOptions title="isEmbossed" options={coverPrintOptions} handleOnChange={(e: ChangeEvent<HTMLSelectElement>) => handleIsEmbossedChange(e)} />
@@ -397,25 +397,25 @@ const Product = ({ title, isSelected, children }: { title: string; isSelected: b
         <img className="" alt={title} src={imageToShow} width={100} onClick={handleClick} />
 
         {isSelected && (
-          <div className="absolute inset-0 opacity-70 flex justify-center items-center">
+          <div className="absolute inset-0 flex items-center justify-center opacity-70">
             <img className="" alt="Print" src={Checkmark} width={80} height={80} />
           </div>
         )}
       </div>
 
-      <div className="text-center text-sm font-bold text-slate-700 py-2">{title}</div>
+      <div className="py-2 text-sm font-bold text-center text-slate-700">{title}</div>
       <div className={isSelected ? "w-full" : "hidden"}>{children}</div>
     </div>
   );
 };
 const ProductOptions = ({ title, options, handleOnChange }: { title: string; options: string[] | boolean[]; handleOnChange: (e: ChangeEvent<HTMLSelectElement>) => void }) => {
   return (
-    <div className="mb-2 px-2">
-      <div className="flex flex-col justify-center items-center ">
+    <div className="px-2 mb-2">
+      <div className="flex flex-col items-center justify-center ">
         <label htmlFor="coverWeight" className="text-sm">
           {title}
         </label>
-        <select id="coverWeight" className="w-full border p-1 rounded focus:outline-none focus:ring-0" onChange={handleOnChange}>
+        <select id="coverWeight" className="w-full p-1 border rounded focus:outline-none focus:ring-0" onChange={handleOnChange}>
           {options.map((option, index) => (
             <option key={index} value={typeof option !== "boolean" ? option : option ? "Yes" : "No"}>
               {option}
