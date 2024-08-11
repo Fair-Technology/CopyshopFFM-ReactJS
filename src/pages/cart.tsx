@@ -14,30 +14,32 @@ const CartPage = () => {
 };
 
 const CartHeader = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex justify-between items-center border-b pb-2 px-3">
-      <h1 className="text-3xl font-medium"> Shopping Basket</h1>
+      <h1 className="text-3xl font-medium"> {t("cart")} </h1>
       <button
         type="button"
         className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 focus:outline-none"
       >
-        + Add more items
+        + {t("add_more").toUpperCase()}
       </button>
     </div>
   );
 };
 
 const CartItems = () => {
+  const { t } = useTranslation();
   return (
     <div className="shadow-md sm:rounded-lg overflow-x-auto">
       <table className="min-w-[980px] table-auto w-full">
         <thead>
           <tr className="border-b border-slate-300">
             <th className="px-4 py-3"></th>
-            <th className="px-4 py-3">Product</th>
-            <th className="px-4 py-3">Options</th>
-            <th className="px-4 py-3">Quantity</th>
-            <th className="px-4 py-3">Price</th>
+            <th className="px-4 py-3"> {t("product")} </th>
+            <th className="px-4 py-3">{t("options")}</th>
+            <th className="px-4 py-3">{t("quantity")}</th>
+            <th className="px-4 py-3">{t("price")}</th>
             <th className="px-4 py-3"></th>
           </tr>
         </thead>
@@ -52,7 +54,7 @@ const CartItems = () => {
               colSpan={2}
               className="px-4 py-2 font-medium whitespace-nowrap text-right"
             >
-              Subtotal
+              {t("cart_subtotal")}
             </td>
             <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-medium text-blue-800">
@@ -66,7 +68,7 @@ const CartItems = () => {
               colSpan={2}
               className="px-4 py-2 font-normal whitespace-nowrap text-right"
             >
-              Tax (incl. 19% VAT)
+              {t("tax_19")}
             </td>
             <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-normal text-blue-800">
@@ -80,7 +82,7 @@ const CartItems = () => {
               colSpan={2}
               className="px-4 py-2 font-normal whitespace-nowrap text-right"
             >
-              Tax (incl. 7% VAT)
+              {t("tax_7")}
             </td>
             <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-normal text-blue-800">
@@ -96,7 +98,7 @@ const CartItems = () => {
               colSpan={2}
               className="px-4 py-2 font-bold whitespace-nowrap text-lg text-right"
             >
-              Total (including all taxes and shipping charges)
+              {t("cart_total")}
             </td>
             <td className="px-4 py-2"></td>
             <td className="px-4 py-2 text-right font-bold text-blue-800 text-lg">
@@ -111,6 +113,7 @@ const CartItems = () => {
 };
 
 const CartItem = () => {
+  const { t } = useTranslation();
   return (
     <TableRow>
       <td className="px-4 py-2 size-32 flex-none">
@@ -122,7 +125,7 @@ const CartItem = () => {
       </td>
       <td className="px-4 py-2">
         <p className="font-normal">1x</p>
-        <p className="font-normal"> Print </p>
+        <p className="font-normal"> {t("print")} </p>
       </td>
       <td className="px-4 py-2">
         <ProductOptions />
@@ -191,13 +194,14 @@ const ProductQuantity = () => {
 };
 
 const ProductDelivery = () => {
+  const { t } = useTranslation();
   return (
     <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
       <td className="px-4 py-2"></td>
-      <td className="px-4 py-2 font-normal"> Delivery </td>
+      <td className="px-4 py-2 font-normal"> {t("delivery")} </td>
       <td colSpan={2} className="px-4 py-2">
         <div className="pl-8">
-          <div className="">
+          <div>
             <input
               id="default-radio-1"
               type="radio"
@@ -207,14 +211,11 @@ const ProductDelivery = () => {
             />
             <label htmlFor="default-radio-1" className="text-base font-base">
               <span className="p-2 relative top-[-3px] inline-block">
-                Pick-up - Downtown branch{" "}
-                <span className="inline-block">
-                  (Mon-Sat 10:00 AM - 6:00 PM)
-                </span>
+                {t("pickup")}
               </span>
             </label>
           </div>
-          <div className="">
+          <div>
             <input
               checked
               id="default-radio-2"
@@ -225,7 +226,7 @@ const ProductDelivery = () => {
             />
             <label htmlFor="default-radio-2" className="text-base font-base">
               <span className="p-2 relative top-[-3px] inline-block">
-                DHL Shipping (Germany-wide)
+                {t("shipping")}
               </span>
             </label>
           </div>
@@ -238,6 +239,7 @@ const ProductDelivery = () => {
 };
 
 const CartActions = () => {
+  const { t } = useTranslation();
   return (
     <div className="px-3 my-4">
       <div className="flex p-8">
@@ -252,15 +254,15 @@ const CartActions = () => {
           htmlFor="default-checkbox"
           className="text-base font-base self-end pl-3"
         >
-          I have read and agree to the{" "}
+          {t("declaration_start")}
           <a href="#" className="text-blue-800">
-            Terms and Conditions
+            {t("terms_and_conditions")}
           </a>{" "}
-          and the{" "}
+          {t("and")}
           <a href="#" className="text-blue-800">
-            Privacy Policy
+            {t("privacy_policy")}
           </a>
-          .
+          {t("declaration_end")}
         </label>
       </div>
       <div className="flex justify-between items-center">
@@ -273,7 +275,7 @@ const CartActions = () => {
           </IconContext.Provider>
 
           <span className="inline-block relative bottom-[-3px]">
-            {" Add More items".toUpperCase()}
+            {t("add_more").toUpperCase()}
           </span>
         </button>
         <button
@@ -281,7 +283,7 @@ const CartActions = () => {
           className="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-lg px-5 py-2.5 focus:outline-none w-2/5"
         >
           <span className="inline-block relative bottom-[-3px]">
-            {"Proceed to checkout".toUpperCase()}
+            {t("proceed_checkout").toUpperCase()}
           </span>
           <IconContext.Provider value={{ className: "size-5 inline mx-2" }}>
             <FaForward />
