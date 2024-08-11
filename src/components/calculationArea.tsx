@@ -108,7 +108,6 @@ const CostSum = () => {
 };
 
 const AddToCartBtn = () => {
-			onClick={() => alert("test add to cart")}
   return (
     <div onClick={AddToCart} className="grid text-xl font-bold text-white bg-red-600 place-content-center min-h-12">
       Add to Cart
