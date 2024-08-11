@@ -4,7 +4,7 @@ import Heading from "../components/heading";
 const CheckOutPage = () => {
 	return (
 		<div className="flex p-2 justify-center ">
-			<div className="2xl:max-w-screen-2xl w-full sm:flex ">
+			<div className="2xl:max-w-screen-2xl w-full sm:flex sm:gap-2 ">
 				<Left />
 				<Right />
 			</div>
@@ -142,7 +142,7 @@ const ContactForm = () => {
 
 const Right = () => {
 	return (
-		<div className="sm:w-72 w-full px-1 flex-col">
+		<div className="sm:w-72 w-full px-1 flex-col bg-slate-100">
 			<Heading text="Your Order" />
 			<PriceTable />
 			<button className="bg-red-600 text-white text-lg font-bold grid place-content-center min-h-6 mt-4 w-full">
@@ -170,13 +170,14 @@ const PriceTable = () => {
 					<td>Product 2</td>
 					<td>16</td>
 				</tr>
-			</tbody>
-			<tfoot className="border-t-2 border-dashed border-gray-400">
+				<tr className="border-b-2 border-dashed border-gray-400">
+					<td className="pt-2"></td>
+				</tr>
 				<tr>
-					<td>In Total:</td>
+					<td className="pt-2">In Total:</td>
 					<td>30</td>
 				</tr>
-			</tfoot>
+			</tbody>
 		</table>
 	);
 };
