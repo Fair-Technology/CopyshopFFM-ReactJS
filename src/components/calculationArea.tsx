@@ -55,13 +55,17 @@ const FormInfoList = () => {
 						</td>
 					</tr>
 					<tr>
-						<td className="px-4 py-2 border-b border-gray-200">Paper weight</td>
+						<td className="px-4 py-2 border-b border-gray-200">
+							{t("weight")}
+						</td>
 						<td className="px-4 py-2 border-b border-l border-gray-200">
 							{currentProduct.weight}/m<sup>2</sup>
 						</td>
 					</tr>
 					<tr>
-						<td className="px-4 py-2 border-b border-gray-200">Print Side</td>
+						<td className="px-4 py-2 border-b border-gray-200">
+							{t("printSetting")}
+						</td>
 						<td className="px-4 py-2 border-b border-l border-gray-200">
 							{currentProduct.printSetting === "singleSided"
 								? "Single Side"
@@ -73,26 +77,38 @@ const FormInfoList = () => {
 						</td>
 					</tr>
 					<tr>
-						<td className="px-4 py-2 border-b border-gray-200">Pages in PDF</td>
+						<td className="px-4 py-2 border-b border-gray-200">
+							{t("pagesInPDF")}
+						</td>
 						<td className="px-4 py-2 border-b border-l border-gray-200">
-							<div>Black and white: {currentProduct.bwPages}</div>
-							<div>Color: {currentProduct.colorPages}</div>
+							<div>
+								{t("bwPages")}: {currentProduct.bwPages}
+							</div>
+							<div>
+								{t("colorPages")}: {currentProduct.colorPages}
+							</div>
 						</td>
 					</tr>
 					<tr>
-						<td className="px-4 py-2 border-b border-gray-200">Copies</td>
+						<td className="px-4 py-2 border-b border-gray-200">
+							{t("numberOfSets")}
+						</td>
 						<td className="px-4 py-2 border-b border-l border-gray-200">
 							{currentProduct.noOfSets} copies
 						</td>
 					</tr>
 					<tr>
-						<td className="px-4 py-2 border-b border-gray-200">Next Step</td>
+						<td className="px-4 py-2 border-b border-gray-200">
+							{t("nextStep")}
+						</td>
 						<td className="px-4 py-2 border-b border-l border-gray-200">
 							{currentProduct.option.name}
 						</td>
 					</tr>
 					<tr>
-						<td className="px-4 py-2 border-b border-gray-200">Options</td>
+						<td className="px-4 py-2 border-b border-gray-200">
+							{t("options")}
+						</td>
 						<td className="px-4 py-2 border-b border-l border-gray-200">NA</td>
 					</tr>
 				</tbody>
