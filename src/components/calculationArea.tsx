@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { calculatePrice } from "../lib/utils";
-import { setError } from "../services/redux/selectionSlice";
+import { resetSelection, setError } from "../services/redux/selectionSlice";
+import { addToCart } from "../services/redux/cartSlice";
 import {
 	RootState,
 	useAppDispatch,
@@ -8,6 +9,7 @@ import {
 } from "../services/redux/store";
 import Heading from "./heading";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const CalculationArea = () => {
 	const dispatch = useAppDispatch();
@@ -144,17 +146,27 @@ const CostSum = () => {
 };
 
 const AddToCartBtn = () => {
+	// States, some declarations
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const allSelectedProduct = useSelector(
+		(state: RootState) => state.selection.selectedProduct
+	);
+
+	// some functions
+	const addToCartFunc = () => {
+		dispatch(addToCart(allSelectedProduct));
+		dispatch(resetSelection());
+		navigate("/cart");
+	};
+
+	// you return JSX
 	return (
 		<div
-			onClick={AddToCart}
+			onClick={addToCartFunc}
 			className="grid text-xl font-bold text-white bg-red-600 place-content-center min-h-12"
 		>
 			Add to Cart
 		</div>
 	);
-};
-
-const AddToCart = () => {
-	alert("You successfully added the items into Cart");
-	return;
 };

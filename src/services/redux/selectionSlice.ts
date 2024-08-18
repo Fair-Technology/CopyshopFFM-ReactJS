@@ -32,11 +32,18 @@ export const selectionSlice = createSlice({
     setSelection: (state, action: PayloadAction<Product>) => {
       state.selectedProduct = action.payload;
     },
-    setError(state, action: PayloadAction<string | null>) {
+    setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
+    resetSelection:(state)=>{
+      state.selectedProduct = defaultSelection
+    }
   },
 });
 
-export const { setSelection, setError } = selectionSlice.actions;
+export const { setSelection, setError, resetSelection } = selectionSlice.actions;
 export default selectionSlice.reducer;
+
+
+
+
