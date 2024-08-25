@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
 import { calculatePrice } from "../lib/utils";
 import { setError } from "../services/redux/selectionSlice";
-import { RootState, useAppDispatch, useAppSelector } from "../services/redux/store";
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from "../services/redux/store";
 import Heading from "./heading";
 import { useTranslation } from "react-i18next";
+import { addToCart } from "../services/redux/cartSlice";
 
 const CalculationArea = () => {
   const dispatch = useAppDispatch();
@@ -33,14 +38,20 @@ export default CalculationArea;
 
 const FormInfoList = () => {
   const { t } = useTranslation();
-  const format = useSelector((store: RootState) => store.selection.selectedProduct.format);
+  const format = useSelector(
+    (store: RootState) => store.selection.selectedProduct.format
+  );
   return (
     <div className="py-2">
       <table className="min-w-full bg-white border border-gray-200">
         <tbody>
           <tr>
-            <td className="px-4 py-2 border-b border-gray-200">{t("format")}</td>
-            <td className="px-4 py-2 border-b border-l border-gray-200">{format}</td>
+            <td className="px-4 py-2 border-b border-gray-200">
+              {t("format")}
+            </td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">
+              {format}
+            </td>
           </tr>
           <tr>
             <td className="px-4 py-2 border-b border-gray-200">Paper weight</td>
@@ -50,7 +61,9 @@ const FormInfoList = () => {
           </tr>
           <tr>
             <td className="px-4 py-2 border-b border-gray-200">Print Side</td>
-            <td className="px-4 py-2 border-b border-l border-gray-200">One-Sided</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">
+              One-Sided
+            </td>
           </tr>
           <tr>
             <td className="px-4 py-2 border-b border-gray-200">Pages in PDF</td>
@@ -61,11 +74,15 @@ const FormInfoList = () => {
           </tr>
           <tr>
             <td className="px-4 py-2 border-b border-gray-200">Copies</td>
-            <td className="px-4 py-2 border-b border-l border-gray-200">3 copies</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">
+              3 copies
+            </td>
           </tr>
           <tr>
             <td className="px-4 py-2 border-b border-gray-200">Next Step</td>
-            <td className="px-4 py-2 border-b border-l border-gray-200">Print</td>
+            <td className="px-4 py-2 border-b border-l border-gray-200">
+              Print
+            </td>
           </tr>
           <tr>
             <td className="px-4 py-2 border-b border-gray-200">Options</td>
@@ -78,7 +95,9 @@ const FormInfoList = () => {
 };
 
 const CostSum = () => {
-  const selectedProduct = useAppSelector((store: RootState) => store.selection.selectedProduct);
+  const selectedProduct = useAppSelector(
+    (store: RootState) => store.selection.selectedProduct
+  );
   const price = calculatePrice(selectedProduct);
   return (
     <div>
@@ -101,21 +120,34 @@ const CostSum = () => {
         &euro; 0.00
         </div>
       </div> */}
-        <div className="px-1 text-sm ">* If you pick at store, the delivery fee will be &euro;0.</div>
+        <div className="px-1 text-sm ">
+          * If you pick at store, the delivery fee will be &euro;0.
+        </div>
       </div>
     </div>
   );
 };
 
 const AddToCartBtn = () => {
+  const current_selection = useAppSelector(
+    (store: RootState) => store.selection
+  );
+  const dispatch = useAppDispatch();
+
+  const AddToCart = () => {
+    alert("You successfully added the items into Cart");
+
+    dispatch(addToCart(current_selection.selectedProduct));
+
+    // should be redirected to cart page
+  };
+
   return (
-    <div onClick={AddToCart} className="grid text-xl font-bold text-white bg-red-600 place-content-center min-h-12">
+    <div
+      onClick={AddToCart}
+      className="grid text-xl font-bold text-white bg-red-600 place-content-center min-h-12"
+    >
       Add to Cart
     </div>
   );
-};
-
-const AddToCart = () => {
-  alert("You successfully added the items into Cart");
-  return;
 };
