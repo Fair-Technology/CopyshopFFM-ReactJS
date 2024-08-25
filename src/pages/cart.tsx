@@ -151,14 +151,14 @@ const CartItem = ({ itemIndex }) => {
     dispatch(deleteFromCart(itemIndex));
   };
 
+  const getProductImage = () => {
+    return `src/assets/${cartItem.option.name}.jpg`;
+  };
+
   return (
     <TableRow>
       <td className="px-4 py-2 size-32 flex-none">
-        <img
-          src={"src/assets/print.jpg"}
-          alt="Product image"
-          className="size-32"
-        />
+        <img src={getProductImage()} alt="Product image" className="size-32" />
       </td>
       <td className="px-4 py-2">
         {/* <p className="font-normal">1x</p> */}
@@ -197,7 +197,7 @@ const ProductOptions = ({ itemIndex }: { [key: string]: number }) => {
     weight: cartItem?.weight,
     printSetting: cartItem?.printSetting,
     flipSetting: cartItem?.flipSetting,
-    numberOfSets: cartItem?.noOfSets,
+    // numberOfSets: cartItem?.noOfSets,
     bwPages: cartItem?.bwPages,
     colorPages: cartItem?.colorPages,
   };
@@ -239,6 +239,7 @@ const ProductQuantity = ({ itemIndex }: { [x: string]: number }) => {
   };
 
   const decrementQuantity = () => {
+    if (cartItem.noOfSets === 1) return;
     const updatedCartItem: Product = {
       ...cartItem,
       noOfSets: cartItem.noOfSets - 1,
@@ -270,7 +271,7 @@ const ProductQuantity = ({ itemIndex }: { [x: string]: number }) => {
 const ProductDelivery = () => {
   const { t } = useTranslation();
   return (
-    <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
+    <tr className="even:bg-white odd:bg-slate-100 border-b border-slate-300">
       <td className="px-4 py-2"></td>
       <td className="px-4 py-2 font-normal"> {t("delivery")} </td>
       <td colSpan={2} className="px-4 py-2">
