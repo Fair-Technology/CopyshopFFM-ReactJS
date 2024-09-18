@@ -170,3 +170,15 @@ const AddToCartBtn = () => {
 		</div>
 	);
 };
+
+const ReactComponent = ({
+	name,
+	surname,
+}: {
+	name: string;
+	surname: string;
+}) => {
+	// staes, dispatch, navigation codes, etc
+	// all functions related to this component
+	// return JSX
+};
