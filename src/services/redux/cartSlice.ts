@@ -20,15 +20,22 @@ export const cartSlice = createSlice({
       state.cartItems.push(action.payload);
       state.totalItems += 1;
     },
-    deleteFromCart: (state, action: PayloadAction<Product>) => {
-      const index = state.cartItems.indexOf(action.payload);
+    deleteFromCart: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
       if (index > -1) {
         state.cartItems.splice(index, 1);
       }
       state.totalItems -= 1;
     },
+    updateCart: (
+      state,
+      action: PayloadAction<{ itemIndex: number; item: Product }>
+    ) => {
+      const { itemIndex, item } = action.payload;
+      state.cartItems[itemIndex] = { ...item };
+    },
   },
 });
 
-export const { addToCart, deleteFromCart } = cartSlice.actions;
+export const { addToCart, deleteFromCart, updateCart } = cartSlice.actions;
 export default cartSlice.reducer;
