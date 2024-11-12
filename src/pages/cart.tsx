@@ -2,8 +2,31 @@ import { useTranslation } from "react-i18next";
 import { IconContext } from "react-icons";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaForward, FaBackward } from "react-icons/fa";
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from "../services/redux/store";
+import { Product } from "../modals/order";
+import { deleteFromCart, updateCart } from "../services/redux/cartSlice";
+import { useState } from "react";
 
 const CartPage = () => {
+  const cartItemsCount: number = useAppSelector(
+    (store: RootState) => store.cart.totalItems
+  );
+
+  if (cartItemsCount === 0) {
+    return (
+      <div className="container mx-auto mt-8 w-4/5">
+        <CartHeader />
+        <div className="text-center mt-8">
+          <h1 className="text-2xl font-medium"> Cart is empty </h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto mt-8 w-4/5">
       <CartHeader />
@@ -30,6 +53,11 @@ const CartHeader = () => {
 
 const CartItems = () => {
   const { t } = useTranslation();
+
+  const cart: Product[] = useAppSelector(
+    (store: RootState) => store.cart.cartItems
+  );
+
   return (
     <div className="shadow-md sm:rounded-lg overflow-x-auto">
       <table className="min-w-[980px] table-auto w-full">
@@ -44,8 +72,8 @@ const CartItems = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <CartItem key={index} />
+          {cart.map((_, index) => (
+            <CartItem key={index} itemIndex={index} />
           ))}
           <ProductDelivery />
           <TableRow>
@@ -112,32 +140,45 @@ const CartItems = () => {
   );
 };
 
-const CartItem = () => {
+const CartItem = ({ itemIndex }) => {
   const { t } = useTranslation();
+  const cartItem: Product = useAppSelector(
+    (store: RootState) => store.cart.cartItems[itemIndex]
+  );
+
+  const dispatch = useAppDispatch();
+
+  const removeItem = () => {
+    dispatch(deleteFromCart(itemIndex));
+  };
+
+  const getProductImage = () => {
+    return `src/assets/${cartItem.option.name}.jpg`;
+  };
+
   return (
     <TableRow>
       <td className="px-4 py-2 size-32 flex-none">
-        <img
-          src={"src/assets/print.jpg"}
-          alt="Product image"
-          className="size-32"
-        />
+        <img src={getProductImage()} alt="Product image" className="size-32" />
       </td>
       <td className="px-4 py-2">
-        <p className="font-normal">1x</p>
-        <p className="font-normal"> {t("print")} </p>
+        {/* <p className="font-normal">1x</p> */}
+        <p className="font-normal"> {t(cartItem.option.name)} </p>
       </td>
       <td className="px-4 py-2">
-        <ProductOptions />
+        <ProductOptions itemIndex={itemIndex} />
       </td>
       <td className="px-4 py-2 text-center">
-        <ProductQuantity />
+        <ProductQuantity itemIndex={itemIndex} />
       </td>
       <td className="px-4 py-2 text-right font-normal text-blue-800">
-        €100.00
+        €{cartItem.cost ? cartItem.cost : 0.0}
       </td>
       <td className="px-4 py-2">
-        <button className="text-white bg-red-600 hover:text-red-800 text-lg text-center font-medium rounded focus:outline-none p-1">
+        <button
+          className="text-white bg-red-600 hover:text-red-800 text-lg text-center font-medium rounded focus:outline-none p-1"
+          onClick={removeItem}
+        >
           <IconContext.Provider value={{ className: "size-6" }}>
             <MdDeleteOutline />
           </IconContext.Provider>
@@ -147,20 +188,25 @@ const CartItem = () => {
   );
 };
 
-const ProductOptions = () => {
+const ProductOptions = ({ itemIndex }: { [key: string]: number }) => {
+  const cartItem = useAppSelector(
+    (store: RootState) => store.cart.cartItems[itemIndex]
+  );
+
   const orderProps = {
-    format: "A4",
-    weight: "80gsm",
-    printSetting: "single-sided",
-    flipSetting: "short-edge",
-    numberOfSets: 1,
-    bwPages: 0,
-    colorPages: 0,
+    format: cartItem?.format,
+    weight: cartItem?.weight,
+    printSetting: cartItem?.printSetting,
+    flipSetting: cartItem?.flipSetting,
+    // numberOfSets: cartItem?.noOfSets,
+    bwPages: cartItem?.bwPages,
+    colorPages: cartItem?.colorPages,
   };
+
   return (
     <div className="">
       {Object.entries(orderProps).map(([key, value]) => (
-        <Chip key={key} name={key} value={value.toString()} />
+        <Chip key={key} name={key} value={value as string} />
       ))}
     </div>
   );
@@ -177,16 +223,46 @@ const Chip = ({ name, value }: { name: string; value: string }) => {
   );
 };
 
-const ProductQuantity = () => {
+const ProductQuantity = ({ itemIndex }: { [x: string]: number }) => {
+  const cartItem: Product = useAppSelector(
+    (store: RootState) => store.cart.cartItems[itemIndex]
+  );
+
+  const dispatch = useAppDispatch();
+
+  const incrementQuantity = () => {
+    console.log(cartItem);
+    const updatedCartItem: Product = {
+      ...cartItem,
+      noOfSets: cartItem.noOfSets + 1,
+    };
+    dispatch(updateCart({ itemIndex, item: updatedCartItem }));
+  };
+
+  const decrementQuantity = () => {
+    if (cartItem.noOfSets === 1) return;
+    const updatedCartItem: Product = {
+      ...cartItem,
+      noOfSets: cartItem.noOfSets - 1,
+    };
+    dispatch(updateCart({ itemIndex, item: updatedCartItem }));
+  };
+
   return (
     <div className="flex items-center">
-      <button className="text-white bg-slate-400 hover:bg-slate-500 font-medium rounded-l-lg text-base px-3 py-1 focus:outline-none">
+      <button
+        className="text-white bg-slate-400 hover:bg-slate-500 font-medium rounded-l-lg text-base px-3 py-1 focus:outline-none"
+        onClick={decrementQuantity}
+      >
         -
       </button>
       <span className="px-3 py-1 text-base bg-slate-600 text-amber-200 font-medium">
-        1
+        {cartItem?.noOfSets}
       </span>
-      <button className="text-white bg-slate-400 hover:bg-slate-500 font-medium rounded-r-lg text-base px-3 py-1 focus:outline-none">
+      <button
+        className="text-white bg-slate-400 hover:bg-slate-500 font-medium rounded-r-lg text-base px-3 py-1 focus:outline-none"
+        onClick={incrementQuantity}
+      >
         +
       </button>
     </div>
@@ -195,21 +271,30 @@ const ProductQuantity = () => {
 
 const ProductDelivery = () => {
   const { t } = useTranslation();
+  const [deliveryMode, setDeliveryMode] = useState<string>("dhl");
+
+  function handleChange(event) {
+    console.log(event.target.value);
+    setDeliveryMode(event.target.value);
+  }
+
   return (
-    <tr className="even:bg-white odd:bg-slate-200 border-b border-slate-300">
+    <tr className="even:bg-white odd:bg-slate-100 border-b border-slate-300">
       <td className="px-4 py-2"></td>
       <td className="px-4 py-2 font-normal"> {t("delivery")} </td>
       <td colSpan={2} className="px-4 py-2">
         <div className="pl-8">
           <div>
             <input
-              id="default-radio-1"
+              id="pickup-radio"
               type="radio"
-              value=""
-              name="default-radio"
+              value="pickup"
+              name="delivery-radio"
               className="size-4"
+              onChange={handleChange}
+              checked={deliveryMode === "pickup"}
             />
-            <label htmlFor="default-radio-1" className="text-base font-base">
+            <label htmlFor="pickup-radio" className="text-base font-base">
               <span className="p-2 relative top-[-3px] inline-block">
                 {t("pickup")}
               </span>
@@ -217,14 +302,15 @@ const ProductDelivery = () => {
           </div>
           <div>
             <input
-              checked
-              id="default-radio-2"
+              id="dhl-radio"
               type="radio"
-              value=""
-              name="default-radio"
+              value="dhl"
+              name="delivery-radio"
               className="size-4"
+              onChange={handleChange}
+              checked={deliveryMode === "dhl"}
             />
-            <label htmlFor="default-radio-2" className="text-base font-base">
+            <label htmlFor="dhl-radio" className="text-base font-base">
               <span className="p-2 relative top-[-3px] inline-block">
                 {t("shipping")}
               </span>
@@ -232,7 +318,9 @@ const ProductDelivery = () => {
           </div>
         </div>
       </td>
-      <td className="px-4 py-2 text-right font-normal text-blue-800">€10.00</td>
+      <td className="px-4 py-2 text-right font-normal text-blue-800">
+        € {deliveryMode == "dhl" ? "4.00" : "0.00"}
+      </td>
       <td className="px-4 py-2"></td>
     </tr>
   );

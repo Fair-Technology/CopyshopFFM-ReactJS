@@ -27,5 +27,6 @@
   "product": "Product",
   "options": "Options",
   "quantity": "Quantity",
-  "price": "Price"
+  "price": "Price",
+  "cart_empty": "Your shopping basket is empty"
 }
