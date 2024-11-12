@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../modals/order";
+import { calculatePrice } from "../../lib/utils";
 
 export interface InitialCartState {
   cartItems: Product[];
@@ -17,7 +18,10 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      state.cartItems.push(action.payload);
+      let item = action.payload;
+      const cost = calculatePrice(item);
+      item = { ...item, cost };
+      state.cartItems.push(item);
       state.totalItems += 1;
     },
     deleteFromCart: (state, action: PayloadAction<number>) => {
@@ -32,7 +36,8 @@ export const cartSlice = createSlice({
       action: PayloadAction<{ itemIndex: number; item: Product }>
     ) => {
       const { itemIndex, item } = action.payload;
-      state.cartItems[itemIndex] = { ...item };
+      const cost = calculatePrice(item);
+      state.cartItems[itemIndex] = { ...item, cost };
     },
   },
 });

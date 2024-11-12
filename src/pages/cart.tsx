@@ -9,6 +9,7 @@ import {
 } from "../services/redux/store";
 import { Product } from "../modals/order";
 import { deleteFromCart, updateCart } from "../services/redux/cartSlice";
+import { useState } from "react";
 
 const CartPage = () => {
   const cartItemsCount: number = useAppSelector(
@@ -171,7 +172,7 @@ const CartItem = ({ itemIndex }) => {
         <ProductQuantity itemIndex={itemIndex} />
       </td>
       <td className="px-4 py-2 text-right font-normal text-blue-800">
-        €100.00
+        €{cartItem.cost ? cartItem.cost : 0.0}
       </td>
       <td className="px-4 py-2">
         <button
@@ -270,6 +271,13 @@ const ProductQuantity = ({ itemIndex }: { [x: string]: number }) => {
 
 const ProductDelivery = () => {
   const { t } = useTranslation();
+  const [deliveryMode, setDeliveryMode] = useState<string>("dhl");
+
+  function handleChange(event) {
+    console.log(event.target.value);
+    setDeliveryMode(event.target.value);
+  }
+
   return (
     <tr className="even:bg-white odd:bg-slate-100 border-b border-slate-300">
       <td className="px-4 py-2"></td>
@@ -278,14 +286,15 @@ const ProductDelivery = () => {
         <div className="pl-8">
           <div>
             <input
-              id="default-radio-1"
+              id="pickup-radio"
               type="radio"
-              value=""
-              name="default-radio"
+              value="pickup"
+              name="delivery-radio"
               className="size-4"
-              readOnly
+              onChange={handleChange}
+              checked={deliveryMode === "pickup"}
             />
-            <label htmlFor="default-radio-1" className="text-base font-base">
+            <label htmlFor="pickup-radio" className="text-base font-base">
               <span className="p-2 relative top-[-3px] inline-block">
                 {t("pickup")}
               </span>
@@ -293,15 +302,15 @@ const ProductDelivery = () => {
           </div>
           <div>
             <input
-              checked
-              id="default-radio-2"
+              id="dhl-radio"
               type="radio"
-              value=""
-              name="default-radio"
+              value="dhl"
+              name="delivery-radio"
               className="size-4"
-              readOnly
+              onChange={handleChange}
+              checked={deliveryMode === "dhl"}
             />
-            <label htmlFor="default-radio-2" className="text-base font-base">
+            <label htmlFor="dhl-radio" className="text-base font-base">
               <span className="p-2 relative top-[-3px] inline-block">
                 {t("shipping")}
               </span>
@@ -309,7 +318,9 @@ const ProductDelivery = () => {
           </div>
         </div>
       </td>
-      <td className="px-4 py-2 text-right font-normal text-blue-800">€10.00</td>
+      <td className="px-4 py-2 text-right font-normal text-blue-800">
+        € {deliveryMode == "dhl" ? "4.00" : "0.00"}
+      </td>
       <td className="px-4 py-2"></td>
     </tr>
   );
